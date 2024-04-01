@@ -1,10 +1,30 @@
 
+### Introduction Things ###
+
+# R Language website
+# https://www.r-project.org/
+
+# R Studio website
+# https://posit.co/download/rstudio-desktop/
+
+# Github
+# https://github.com/krstout/R-Tutorial
+
+# Walkthrough R Studio interface
+# Console pane, environment pane, image pane, script, start new script
+
+# Add ggplot example to end
+# Where to get help for R
+
+
 # "#" to comment in the code, R will not run lines with #
 
 ### Import Data ###
 
 data <- read.csv("Erie_County_Election_Data.csv")
 # Use full filepath to tell R where the data file is located
+# For example: data <- read.csv("C:\\Users\\kevin\\Dropbox\\Data Projects\\R Tutorial\\Erie_County_Election_Data.csv")
+# Need to add an extra "\" on Windows PC but not Macs
 # "data" should appear in the "Environment" panel on the right
 # Click on spreadsheet icon to bring up the data
 # Click on arrow to show list of variables
@@ -197,3 +217,45 @@ model3 <- lm(pres.score.g20 ~ pres.score.g16 + gov.score.g18 + p.nonwhite + p.co
 
 summary(model3)
 # Not all independent variables are significant
+
+nobs(model3)
+# Get the number of observations for the model
+
+### Make Nice Graphics with ggplot2
+
+install.packages("ggplot2")
+# Can install addons to R called packages
+# Most will install from CRAN easily
+
+library(ggplot2)
+# Need to use library to tell R that you're loading a package
+# Only need to install package once, but need to use library each time package is used in a script
+
+scatterplot <- ggplot(data, aes(x = p.black, y = pres.score.g16)) +
+  geom_point()
+scatterplot
+# Simple scatter plot
+# Note the use of the "+" at the end of the line
+
+scatterplot <- ggplot(data, aes(x = p.black, y = pres.score.g16)) + # adds data to x and y
+  geom_point() +  # adds points to plot
+  scale_x_continuous(labels = function(x) paste0(x, "%")) + # adds "%" to tick marks on axis
+  scale_y_continuous(labels = function(x) paste0(x, "%")) +
+  labs(title = "Relationship Between % Black and % Democratic Presidential Vote",  # Change titles, axis labels
+       x = "% Black", y = "Democratic Pres Vote") +
+  theme_bw() + # this portion tweaks the looks of the grid lines
+  theme(plot.title = element_text(hjust = 0.5), 
+        panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), panel.border = element_blank())
+scatterplot
+# This plot has many more changes to make it look better
+# Can use the "Export" button in the plot pane to save the plot
+
+
+### Resources for help with R
+
+# Google your problem: copy and paste error message or ask how to do something "in r"
+# StackOverflow for help with errors and questions
+# Quick-R: https://www.statmethods.net/r-tutorial/index.html
+# Cookbook for R: http://www.cookbook-r.com/
+# R for Data Science (bit more advanced because they use tidyverse)
