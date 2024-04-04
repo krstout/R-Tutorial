@@ -22,6 +22,7 @@
 ### Import Data ###
 
 data <- read.csv("Erie_County_Election_Data.csv")
+#data <- read.csv("C:\\Users\\kevin\\Downloads\\Erie_County_Election_Data.csv")
 # Use full filepath to tell R where the data file is located
 # For example: data <- read.csv("C:\\Users\\kevin\\Dropbox\\Data Projects\\R Tutorial\\Erie_County_Election_Data.csv")
 # Need to add an extra "\" on Windows PC but not Macs
@@ -250,6 +251,14 @@ scatterplot <- ggplot(data, aes(x = p.black, y = pres.score.g16)) + # adds data 
 scatterplot
 # This plot has many more changes to make it look better
 # Can use the "Export" button in the plot pane to save the plot
+
+
+install.packages("plotly")
+library(plotly)
+# Use plotly to make an interactive plot
+
+ggplotly(scatterplot)
+# Use mouse to hover over point and get x and y values
 
 
 ### Resources for help with R
